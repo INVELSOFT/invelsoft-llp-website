@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample C – License + Support</title>
+<style>
+  :root{--navy:#0b1b36;--ink:#1a2740;--muted:#58667e;--line:#e1e7f0;--primary:#1f56d6;--primary-hover:#1846b3;--primary-soft:#eaf0ff;--green:#0e8f64;--green-soft:#e3f6ee;--amber:#f5a524;--bg-soft:#f4f7fc}
+  html{color-scheme:light}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);line-height:1.55;background:#fff}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+  .topbar{background:var(--navy);color:#dfe7f5;font-size:.82rem;text-align:center;padding:8px 12px}
+  .topbar b{color:#fff}
+  header{border-bottom:1px solid var(--line);background:#fff}
+  .head{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;color:var(--navy)}
+  .mark{width:32px;height:32px;border-radius:8px;background:var(--primary);display:grid;place-items:center;color:#fff;font-weight:800}
+  .call{display:flex;align-items:center;gap:10px}
+  .call small{display:block;font-size:.72rem;color:var(--muted);line-height:1.1}
+  .call strong{font-size:1.02rem;color:var(--navy)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:.8rem 1.3rem;border-radius:10px;font-weight:700;font-size:1rem;border:1.5px solid transparent;cursor:pointer}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-outline{background:#fff;border-color:var(--line);color:var(--navy)}
+  .btn-green{background:var(--green);color:#fff}
+  .hero{background:linear-gradient(180deg,var(--bg-soft),#fff);padding:44px 0 56px}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:start}
+  .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.8rem;font-weight:700;color:var(--navy)}
+  .badge i{width:14px;height:14px;display:grid;grid-template-columns:1fr 1fr;gap:2px}
+  .badge i span:nth-child(1){background:#f25022}.badge i span:nth-child(2){background:#7fba00}.badge i span:nth-child(3){background:#00a4ef}.badge i span:nth-child(4){background:#ffb900}
+  h1{font-size:2.6rem;line-height:1.12;letter-spacing:-.02em;color:var(--navy);margin:18px 0 14px}
+  h1 em{font-style:normal;color:var(--primary)}
+  .lead{font-size:1.1rem;color:var(--muted);margin:0 0 24px;max-width:560px}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+  .mini-trust{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:.88rem;color:var(--ink)}
+  .mini-trust span{display:flex;align-items:center;gap:7px}
+  .mini-trust span::before{content:"✓";width:20px;height:20px;border-radius:50%;background:var(--green-soft);color:var(--green);font-weight:800;font-size:.72rem;display:grid;place-items:center}
+  .stars{color:var(--amber);letter-spacing:1px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 2px 4px rgba(11,27,54,.05),0 18px 40px rgba(11,27,54,.1);padding:26px}
+  .card h2{margin:0 0 4px;font-size:1.3rem;color:var(--navy)}
+  .card .sub{margin:0 0 18px;color:var(--muted);font-size:.9rem}
+  .field{margin-bottom:12px}
+  .field label{display:block;font-size:.84rem;font-weight:600;color:var(--navy);margin-bottom:5px}
+  .field input,.field select{width:100%;padding:.72rem .85rem;border:1.5px solid #cfd8e6;border-radius:10px;font:inherit;color:var(--ink);background:#fff}
+  .card .btn{width:100%;margin-top:6px;padding:.9rem}
+  .or{margin:14px 0 0;text-align:center;font-size:.86rem;color:var(--muted)}
+  .or a{color:var(--primary);font-weight:700}
+  .secure{margin-top:10px;text-align:center;font-size:.75rem;color:var(--muted)}
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+  .strip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-top:18px;padding-bottom:18px}
+  .strip-item{display:flex;gap:12px;align-items:center}
+  .strip-icon{width:40px;height:40px;border-radius:10px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;font-size:1.1rem;flex:none}
+  .strip-item b{display:block;color:var(--navy);font-size:.92rem}
+  .strip-item small{color:var(--muted);font-size:.8rem}
+  section.block{padding:60px 0}
+  .alt{background:var(--bg-soft)}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 34px}
+  .sec-head h2{font-size:2rem;color:var(--navy);margin:0 0 8px;letter-spacing:-.01em}
+  .sec-head p{color:var(--muted);margin:0}
+  .products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .product{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;position:relative}
+  .product.hot{border:2px solid var(--primary)}
+  .tag{position:absolute;top:-11px;left:20px;background:var(--primary);color:#fff;font-size:.7rem;font-weight:800;padding:3px 10px;border-radius:999px;letter-spacing:.04em}
+  .p-icon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:800;margin-bottom:14px}
+  .product h3{margin:0 0 4px;font-size:1.05rem;color:var(--navy)}
+  .product .desc{font-size:.85rem;color:var(--muted);margin:0 0 14px;min-height:40px}
+  .price{font-size:1.6rem;font-weight:800;color:var(--navy)}
+  .price small{font-size:.8rem;font-weight:600;color:var(--muted)}
+  .incl{list-style:none;padding:0;margin:12px 0 18px;font-size:.84rem;display:grid;gap:6px;flex:1}
+  .incl li::before{content:"✓ ";color:var(--green);font-weight:800}
+  .product .btn{width:100%;padding:.7rem}
+  .incl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .incl-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+  .incl-card .strip-icon{margin-bottom:14px}
+  .incl-card h3{margin:0 0 6px;font-size:1rem;color:var(--navy)}
+  .incl-card p{margin:0;font-size:.88rem;color:var(--muted)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+  .step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+  .step::before{counter-increment:s;content:counter(s);width:36px;height:36px;border-radius:50%;background:var(--primary);color:#fff;font-weight:800;display:grid;place-items:center;margin-bottom:12px}
+  .step h3{margin:0 0 6px;font-size:1rem;color:var(--navy)}
+  .step p{margin:0;font-size:.88rem;color:var(--muted)}
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .review{background:#fff;border:1px dashed #c3cfe3;border-radius:14px;padding:22px;color:var(--muted);font-size:.9rem}
+  .review .stars{display:block;margin-bottom:8px}
+  .review b{display:block;margin-top:10px;color:var(--navy);font-size:.85rem}
+  .cta-band{background:var(--navy);color:#fff;padding:44px 0}
+  .cta-band .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .cta-band h2{margin:0 0 4px;font-size:1.6rem}
+  .cta-band p{margin:0;color:#b9c6dd}
+  .cta-band .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+  footer{background:#071329;color:#9fb0cc;font-size:.82rem;padding:30px 0 90px}
+  footer .links{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:12px}
+  footer .links a{color:#dbe4f3}
+  .chat-bubble{position:fixed;right:20px;bottom:20px;display:flex;align-items:center;gap:10px;background:var(--primary);color:#fff;padding:12px 18px 12px 12px;border-radius:999px;box-shadow:0 10px 30px rgba(31,86,214,.4);font-weight:700;font-size:.92rem}
+  .chat-bubble .dot{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--primary);display:grid;place-items:center;font-size:1rem;position:relative}
+  .chat-bubble .dot::after{content:"";position:absolute;right:-1px;bottom:-1px;width:10px;height:10px;border-radius:50%;background:#2fd18b;border:2px solid var(--primary)}
+  .mobile-bar{display:none}
+  .note-ph{font-size:.72rem;color:#9aa6ba;font-style:italic}
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr}
+    h1{font-size:2rem}
+    .strip-grid,.products,.incl-grid{grid-template-columns:1fr 1fr}
+    .steps,.reviews{grid-template-columns:1fr}
+    .call small{display:none}
+  }
+  @media (max-width:520px){
+    .head .btn{display:none}
+    .strip-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .products{grid-template-columns:1fr}
+    .incl-grid{grid-template-columns:1fr 1fr}
+    .sec-head h2{font-size:1.55rem}
+    .chat-bubble{display:none}
+    .mobile-bar{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 12px;background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(11,27,54,.08)}
+    .mobile-bar .btn{padding:.75rem .5rem;font-size:.95rem}
+  }
+</style>
+</head>
+<body>
+  <div class="topbar"><b>Microsoft Partner</b> · Genuine licenses · Free setup &amp; 24/7 US-based support</div>
+  <header>
+    <div class="wrap head">
+      <a class="brand" href="#"><span class="mark">i</span>Invelsoft</a>
+      <div class="call">
+        <div><small>Talk to a specialist</small><strong>📞 (XXX) XXX-XXXX</strong></div>
+        <a class="btn btn-primary" href="#quote">Get my price</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="badge"><i><span></span><span></span><span></span><span></span></i>Microsoft Partner · US</span>
+        <h1>Genuine Microsoft 365 &amp; Windows — <em>set up for you, free</em></h1>
+        <p class="lead">Buy or renew from an authorized Microsoft partner. Every license includes free installation, Outlook &amp; data setup, and 24/7 support from our US team.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#quote">Get my price</a>
+          <a class="btn btn-outline" href="#">📞 Call now</a>
+        </div>
+        <div class="mini-trust">
+          <span><b class="stars">★★★★★</b>&nbsp;Rated X.X/5</span>
+          <span>Instant license delivery</span>
+          <span>Money-back guarantee</span>
+        </div>
+      </div>
+
+      <form class="card" id="quote">
+        <h2>Get your price in minutes</h2>
+        <p class="sub">Tell us what you need — a specialist will call you right back.</p>
+        <div class="field"><label>Full name</label><input placeholder="John Smith"></div>
+        <div class="field"><label>Phone</label><input placeholder="(555) 123-4567"></div>
+        <div class="field"><label>Email</label><input placeholder="john@email.com"></div>
+        <div class="field"><label>What do you need?</label>
+          <select>
+            <option>Microsoft 365 (Personal / Family)</option>
+            <option>Microsoft 365 for Business</option>
+            <option>Office Home 2024 (one-time)</option>
+            <option>Windows 11 Home / Pro</option>
+            <option>Renew my subscription</option>
+            <option>Setup help with a license I own</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="button">Get my price →</button>
+        <p class="or">or <a href="#">chat with a specialist now</a></p>
+        <p class="secure">🔒 Your details are private. No spam, ever.</p>
+      </form>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap strip-grid">
+      <div class="strip-item"><span class="strip-icon">🛡️</span><div><b>Microsoft Partner</b><small>100% genuine licenses</small></div></div>
+      <div class="strip-item"><span class="strip-icon">⚡</span><div><b>Instant delivery</b><small>Activated same day</small></div></div>
+      <div class="strip-item"><span class="strip-icon">🛠️</span><div><b>Free setup</b><small>We install it for you</small></div></div>
+      <div class="strip-item"><span class="strip-icon">🇺🇸</span><div><b>24/7 US support</b><small>Real people, anytime</small></div></div>
+    </div>
+  </div>
+
+  <section class="block alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Popular Microsoft products</h2>
+        <p>Every purchase includes free installation and ongoing support.</p>
+      </div>
+      <div class="products">
+        <div class="product hot"><span class="tag">MOST POPULAR</span>
+          <span class="p-icon" style="background:#d83b01">365</span>
+          <h3>Microsoft 365 Family</h3><p class="desc">Up to 6 people · Word, Excel, Outlook, 1 TB each</p>
+          <div class="price">$XX<small> /year</small></div>
+          <ul class="incl"><li>Free installation</li><li>Outlook &amp; email setup</li><li>24/7 support</li></ul>
+          <a class="btn btn-primary" href="#quote">Get this</a></div>
+        <div class="product">
+          <span class="p-icon" style="background:#0f6cbd">B</span>
+          <h3>Microsoft 365 Business</h3><p class="desc">Teams, business email &amp; apps for your company</p>
+          <div class="price">$XX<small> /user/mo</small></div>
+          <ul class="incl"><li>Free migration help</li><li>Domain email setup</li><li>24/7 support</li></ul>
+          <a class="btn btn-outline" href="#quote">Get this</a></div>
+        <div class="product">
+          <span class="p-icon" style="background:#185abd">O</span>
+          <h3>Office Home 2024</h3><p class="desc">One-time purchase · Word, Excel, PowerPoint</p>
+          <div class="price">$XX<small> one-time</small></div>
+          <ul class="incl"><li>No subscription</li><li>Free installation</li><li>24/7 support</li></ul>
+          <a class="btn btn-outline" href="#quote">Get this</a></div>
+        <div class="product">
+          <span class="p-icon" style="background:#0078d4">⊞</span>
+          <h3>Windows 11 Pro</h3><p class="desc">Upgrade or activate your PC with a genuine key</p>
+          <div class="price">$XX<small> one-time</small></div>
+          <ul class="incl"><li>Activation guaranteed</li><li>Upgrade assistance</li><li>24/7 support</li></ul>
+          <a class="btn btn-outline" href="#quote">Get this</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Included with every license</h2>
+        <p>Not just a key — we make sure everything works.</p>
+      </div>
+      <div class="incl-grid">
+        <div class="incl-card"><span class="strip-icon">💻</span><h3>Installation</h3><p>We install and activate on your PC or Mac.</p></div>
+        <div class="incl-card"><span class="strip-icon">✉️</span><h3>Outlook setup</h3><p>Email accounts, calendar and contacts configured.</p></div>
+        <div class="incl-card"><span class="strip-icon">📁</span><h3>Data transfer</h3><p>Move files and settings from your old setup.</p></div>
+        <div class="incl-card"><span class="strip-icon">🎧</span><h3>24/7 support</h3><p>Questions later? We're a call or chat away.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block alt">
+    <div class="wrap">
+      <div class="sec-head"><h2>How it works</h2></div>
+      <div class="steps">
+        <div class="step"><h3>Tell us what you need</h3><p>Fill the short form, chat, or call us.</p></div>
+        <div class="step"><h3>Get the right license</h3><p>A specialist confirms the best option and price.</p></div>
+        <div class="step"><h3>We set it up</h3><p>We install and activate it — you're ready to go.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><h2>What customers say</h2><p class="note-ph">(Real Trustpilot / Google reviews widget goes here)</p></div>
+      <div class="reviews">
+        <div class="review"><span class="stars">★★★★★</span>Your real customer review will appear here.<b>— Customer name, City</b></div>
+        <div class="review"><span class="stars">★★★★★</span>Your real customer review will appear here.<b>— Customer name, City</b></div>
+        <div class="review"><span class="stars">★★★★★</span>Your real customer review will appear here.<b>— Customer name, City</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <div><h2>Ready to get genuine Microsoft software?</h2><p>Talk to a US-based specialist now — setup is on us.</p></div>
+      <div class="cta-row" style="margin:0"><a class="btn btn-primary" href="#quote">Get my price</a><a class="btn btn-outline" href="#">📞 (XXX) XXX-XXXX</a></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="links"><a href="#">About</a><a href="#">Contact</a><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Refund Policy</a></div>
+      <p>Invelsoft LLP · [US address] · (XXX) XXX-XXXX · [email]</p>
+      <p>Microsoft, Windows, Microsoft 365 and Office are trademarks of Microsoft Corporation. Invelsoft is an independent Microsoft partner.</p>
+    </div>
+  </footer>
+
+  <a class="chat-bubble" href="#"><span class="dot">💬</span>Chat with a specialist</a>
+  <div class="mobile-bar"><a class="btn btn-outline" href="#">📞 Call</a><a class="btn btn-primary" href="#">💬 Chat now</a></div>
+</body>
+</html>

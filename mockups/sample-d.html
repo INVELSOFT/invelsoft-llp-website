@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample D – Chat first</title>
+<style>
+  :root{--navy:#0b1b36;--ink:#1a2740;--muted:#58667e;--line:#e1e7f0;--primary:#1f56d6;--primary-soft:#eaf0ff;--green:#0e8f64;--green-soft:#e3f6ee;--amber:#f5a524}
+  html{color-scheme:light}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);line-height:1.55;background:#fff}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+  header{background:#fff;border-bottom:1px solid var(--line)}
+  .head{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;color:var(--navy)}
+  .mark{width:32px;height:32px;border-radius:8px;background:var(--primary);display:grid;place-items:center;color:#fff;font-weight:800}
+  .phone{font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px}
+  .phone .pill{font-size:.7rem;font-weight:700;background:var(--green-soft);color:var(--green);padding:3px 8px;border-radius:999px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:.8rem 1.3rem;border-radius:10px;font-weight:700;font-size:1rem;border:1.5px solid transparent;cursor:pointer}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-outline{background:#fff;border-color:var(--line);color:var(--navy)}
+  .hero{background:radial-gradient(900px 420px at 85% -10%,rgba(80,130,255,.35) 0%,transparent 60%),linear-gradient(180deg,#0b1b36 0%,#132b57 100%);color:#fff;padding:48px 0 64px}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#a9c1ff}
+  .eyebrow i{width:14px;height:14px;display:grid;grid-template-columns:1fr 1fr;gap:2px}
+  .eyebrow i span:nth-child(1){background:#f25022}.eyebrow i span:nth-child(2){background:#7fba00}.eyebrow i span:nth-child(3){background:#00a4ef}.eyebrow i span:nth-child(4){background:#ffb900}
+  h1{font-size:2.55rem;line-height:1.12;letter-spacing:-.02em;margin:14px 0 14px}
+  .lead{font-size:1.08rem;color:#c8d4ea;margin:0 0 22px}
+  .points{list-style:none;padding:0;margin:0 0 26px;display:grid;gap:10px}
+  .points li{display:flex;gap:10px;align-items:center}
+  .points li::before{content:"✓";width:22px;height:22px;border-radius:50%;background:rgba(47,209,139,.15);color:#2fd18b;font-weight:800;font-size:.75rem;display:grid;place-items:center;flex:none}
+  .rating{display:flex;align-items:center;gap:10px;font-size:.9rem;color:#c8d4ea}
+  .rating .stars{color:var(--amber);letter-spacing:1px}
+  .chat{background:#fff;color:var(--ink);border-radius:18px;box-shadow:0 30px 60px rgba(0,0,0,.35);overflow:hidden}
+  .chat-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--primary);color:#fff}
+  .avatar{width:42px;height:42px;border-radius:50%;background:#fff;color:var(--primary);display:grid;place-items:center;font-weight:800;position:relative;flex:none}
+  .avatar::after{content:"";position:absolute;right:0;bottom:0;width:11px;height:11px;border-radius:50%;background:#2fd18b;border:2px solid var(--primary)}
+  .chat-head b{display:block;font-size:.98rem}
+  .chat-head small{color:#dbe6ff;font-size:.78rem}
+  .chat-body{padding:18px 16px;background:#f6f8fc;display:grid;gap:12px}
+  .msg{max-width:88%;padding:10px 14px;border-radius:14px 14px 14px 4px;background:#fff;border:1px solid var(--line);font-size:.92rem}
+  .msg.small{font-size:.82rem;color:var(--muted);background:transparent;border:none;padding:0 2px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{padding:8px 13px;border-radius:999px;border:1.5px solid var(--primary);color:var(--primary);background:#fff;font-size:.86rem;font-weight:600}
+  .chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:#fff}
+  .chat-input input{flex:1;padding:.75rem .9rem;border:1.5px solid #cfd8e6;border-radius:10px;font:inherit}
+  .chat-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px 14px;background:#fff;font-size:.8rem;color:var(--muted)}
+  .online{display:flex;align-items:center;gap:6px;color:var(--green);font-weight:700}
+  .online::before{content:"";width:8px;height:8px;border-radius:50%;background:#2fd18b}
+  .callback{background:#fff;border-bottom:1px solid var(--line)}
+  .cb-grid{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;padding-top:22px;padding-bottom:22px}
+  .cb-grid h2{margin:0;font-size:1.15rem;color:var(--navy)}
+  .cb-grid p{margin:2px 0 0;color:var(--muted);font-size:.88rem}
+  .cb-form{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px}
+  .cb-form input,.cb-form select{padding:.72rem .85rem;border:1.5px solid #cfd8e6;border-radius:10px;font:inherit;background:#fff;color:var(--ink)}
+  section.block{padding:56px 0}
+  .alt{background:#f4f7fc}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 30px}
+  .sec-head h2{font-size:1.9rem;color:var(--navy);margin:0 0 8px}
+  .sec-head p{color:var(--muted);margin:0}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .tile{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center}
+  .t-icon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:800;flex:none}
+  .tile b{display:block;color:var(--navy)}
+  .tile small{color:var(--muted);font-size:.83rem}
+  .tile .go{margin-left:auto;color:var(--primary);font-weight:800}
+  .why{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .why div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
+  .why b{display:block;color:var(--navy);margin:8px 0 4px}
+  .why small{color:var(--muted);font-size:.86rem}
+  .why span{font-size:1.4rem}
+  footer{background:#071329;color:#9fb0cc;font-size:.82rem;padding:28px 0 90px}
+  footer .links{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:12px}
+  footer .links a{color:#dbe4f3}
+  .mobile-bar{display:none}
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr}
+    h1{font-size:2rem}
+    .cb-grid{grid-template-columns:1fr}
+    .cb-form{grid-template-columns:1fr 1fr}
+    .tiles{grid-template-columns:1fr 1fr}
+    .why{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:520px){
+    .phone .pill{display:none}
+    .hero{padding:32px 0 44px}
+    .cb-form{grid-template-columns:1fr}
+    .tiles{grid-template-columns:1fr}
+    .sec-head h2{font-size:1.5rem}
+    .mobile-bar{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 12px;background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(11,27,54,.08)}
+    .mobile-bar .btn{padding:.75rem .5rem;font-size:.95rem}
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap head">
+      <a class="brand" href="#"><span class="mark">i</span>Invelsoft</a>
+      <a class="phone" href="#"><span class="pill">● Open 24/7</span>📞 (XXX) XXX-XXXX</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><i><span></span><span></span><span></span><span></span></i>Microsoft Partner · US-based team</span>
+        <h1>Talk to a Microsoft licensing &amp; setup specialist — right now</h1>
+        <p class="lead">Buy, renew or set up Microsoft 365, Office and Windows with help from a real person. Free installation with every license.</p>
+        <ul class="points">
+          <li>Genuine licenses from a Microsoft partner</li>
+          <li>We install &amp; activate it for you — free</li>
+          <li>24/7 support by chat or phone</li>
+        </ul>
+        <div class="rating"><span class="stars">★★★★★</span>Rated X.X/5 by customers</div>
+      </div>
+
+      <div class="chat">
+        <div class="chat-head">
+          <span class="avatar">IS</span>
+          <div><b>Invelsoft Specialist</b><small>Microsoft 365 &amp; Windows · replies instantly</small></div>
+        </div>
+        <div class="chat-body">
+          <div class="msg">👋 Hi! I'm here to help. What are you looking for today?</div>
+          <div class="chips">
+            <span class="chip">Buy Microsoft 365</span>
+            <span class="chip">Office 2024</span>
+            <span class="chip">Windows 11 license</span>
+            <span class="chip">Renew subscription</span>
+            <span class="chip">Install / setup help</span>
+          </div>
+          <div class="msg small">Tap an option or type your question below.</div>
+        </div>
+        <div class="chat-input">
+          <input placeholder="Type your question here…">
+          <button class="btn btn-primary" type="button">Start chat</button>
+        </div>
+        <div class="chat-foot"><span class="online">3 specialists online now</span><span>Powered by Zoho SalesIQ</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="callback">
+    <div class="wrap cb-grid">
+      <div><h2>Prefer a call back?</h2><p>Leave your number — we'll call within minutes.</p></div>
+      <form class="cb-form">
+        <input placeholder="Your name">
+        <input placeholder="Phone number">
+        <select><option>What do you need?</option><option>Microsoft 365</option><option>Office 2024</option><option>Windows 11</option><option>Renewal</option><option>Setup help</option></select>
+        <button class="btn btn-primary" type="button">Call me</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="block alt">
+    <div class="wrap">
+      <div class="sec-head"><h2>What can we help with?</h2><p>Genuine licenses plus free setup and support.</p></div>
+      <div class="tiles">
+        <a class="tile" href="#"><span class="t-icon" style="background:#d83b01">365</span><div><b>Microsoft 365</b><small>Personal, Family &amp; Business</small></div><span class="go">→</span></a>
+        <a class="tile" href="#"><span class="t-icon" style="background:#185abd">O</span><div><b>Office 2024</b><small>One-time purchase</small></div><span class="go">→</span></a>
+        <a class="tile" href="#"><span class="t-icon" style="background:#0078d4">⊞</span><div><b>Windows 11</b><small>Home &amp; Pro licenses</small></div><span class="go">→</span></a>
+        <a class="tile" href="#"><span class="t-icon" style="background:#0f6cbd">✉</span><div><b>Outlook setup</b><small>Email, calendar &amp; contacts</small></div><span class="go">→</span></a>
+        <a class="tile" href="#"><span class="t-icon" style="background:#107c41">X</span><div><b>Excel &amp; Office apps</b><small>Install, activate, fix</small></div><span class="go">→</span></a>
+        <a class="tile" href="#"><span class="t-icon" style="background:#107c10">🎮</span><div><b>Xbox Game Pass</b><small>Subscriptions &amp; setup</small></div><span class="go">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><h2>Why customers choose Invelsoft</h2></div>
+      <div class="why">
+        <div><span>🛡️</span><b>Microsoft partner</b><small>100% genuine, activated licenses.</small></div>
+        <div><span>🛠️</span><b>Free setup</b><small>We install everything for you.</small></div>
+        <div><span>💬</span><b>Real people</b><small>US-based specialists, 24/7.</small></div>
+        <div><span>💵</span><b>Clear pricing</b><small>Know the price before you pay.</small></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="links"><a href="#">About</a><a href="#">Contact</a><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="#">Refund Policy</a></div>
+      <p>Invelsoft LLP · [US address] · (XXX) XXX-XXXX · [email]</p>
+      <p>Microsoft, Windows, Microsoft 365, Office and Xbox are trademarks of Microsoft Corporation. Invelsoft is an independent Microsoft partner.</p>
+    </div>
+  </footer>
+
+  <div class="mobile-bar"><a class="btn btn-outline" href="#">📞 Call</a><a class="btn btn-primary" href="#">💬 Chat now</a></div>
+</body>
+</html>

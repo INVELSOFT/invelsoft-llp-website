@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample A – Split hero</title>
+<style>
+  :root{--navy:#0e1e3b;--ink:#1a2740;--muted:#56647d;--line:#e0e6ef;--primary:#1f56d6;--primary-hover:#1846b3;--primary-soft:#e9efff;--bg-soft:#f3f6fb;}
+  *{box-sizing:border-box}
+  html{color-scheme:light}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);line-height:1.6;background:#fff}
+  header{padding:18px 24px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}
+  .brand-mark{width:30px;height:30px;border-radius:8px;background:var(--primary)}
+  .brand{font-weight:700;font-size:1.2rem;color:var(--navy)}
+  .hero{background:linear-gradient(180deg,var(--bg-soft),#fff);padding:56px 24px}
+  .wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:start}
+  .eyebrow{display:inline-block;margin-bottom:16px;padding:6px 12px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  h1{font-size:2.5rem;line-height:1.15;color:var(--navy);margin:0 0 16px;letter-spacing:-.02em}
+  .lead{color:var(--muted);font-size:1.1rem;margin:0 0 24px}
+  .points{list-style:none;padding:0;margin:0 0 8px;display:grid;gap:12px}
+  .points li{display:flex;gap:10px;align-items:flex-start;color:var(--ink)}
+  .points li::before{content:"✓";flex:none;width:22px;height:22px;border-radius:50%;background:#e2f5ee;color:#0e8f64;font-weight:700;display:grid;place-items:center;font-size:.8rem}
+  .products{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .products span{font-size:.82rem;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:#fff}
+  .card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 2px 4px rgba(14,30,59,.06),0 14px 32px rgba(14,30,59,.1);padding:28px;position:sticky;top:24px}
+  .card h2{margin:0 0 4px;font-size:1.3rem;color:var(--navy)}
+  .card p.sub{margin:0 0 20px;color:var(--muted);font-size:.92rem}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:.88rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+  .field input,.field select,.field textarea{width:100%;padding:.7rem .85rem;border:1.5px solid #cdd6e4;border-radius:10px;font:inherit;color:var(--ink)}
+  .field textarea{min-height:72px;resize:vertical}
+  button{width:100%;padding:.85rem;background:var(--primary);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:1rem;cursor:pointer;margin-top:4px}
+  button:hover{background:var(--primary-hover)}
+  .note{margin-top:14px;font-size:.78rem;color:var(--muted);text-align:center}
+  @media(max-width:860px){.wrap{grid-template-columns:1fr}.card{position:static}}
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand-mark"></div>
+    <span class="brand">Invelsoft</span>
+  </header>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Microsoft product support</span>
+        <h1>Get a callback for your Microsoft software issue</h1>
+        <p class="lead">Office 365, Windows, Outlook, Excel or Xbox — tell us what's wrong and a specialist will call you back at a time that suits you.</p>
+        <ul class="points">
+          <li>Callback at your preferred time</li>
+          <li>Cost explained before any paid work</li>
+          <li>Your details stay private</li>
+        </ul>
+        <div class="products">
+          <span>Office 365</span><span>Windows 10</span><span>Windows 11</span><span>Outlook</span><span>Excel</span><span>Xbox</span>
+        </div>
+      </div>
+      <form class="card">
+        <h2>Request a callback</h2>
+        <p class="sub">Fill this in and we'll call you back.</p>
+        <div class="field"><label>Full name</label><input type="text" placeholder="Your name"></div>
+        <div class="field"><label>Phone number</label><input type="tel" placeholder="+91 98765 43210"></div>
+        <div class="field"><label>Which product?</label>
+          <select><option>Microsoft Office 365</option><option>Windows 10</option><option>Windows 11</option><option>Outlook</option><option>Excel</option><option>Xbox</option></select>
+        </div>
+        <div class="field"><label>What's the issue? <span style="font-weight:400;color:var(--muted)">(optional)</span></label><textarea placeholder="Briefly describe what's happening..."></textarea></div>
+        <button type="button">Request a callback</button>
+        <p class="note">We'll only use your details to respond to this request.</p>
+      </form>
+    </div>
+  </section>
+</body>
+</html>

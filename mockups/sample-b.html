@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample B – Centered minimal</title>
+<style>
+  :root{--navy:#10241f;--ink:#182620;--muted:#5b6b64;--line:#dde7e2;--primary:#0e8f64;--primary-hover:#0b7552;--primary-soft:#e2f5ee;--bg-soft:#f2f8f5;}
+  *{box-sizing:border-box}
+  html{color-scheme:light}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);line-height:1.6;background:var(--bg-soft)}
+  header{padding:18px 24px;display:flex;align-items:center;justify-content:center;gap:10px}
+  .brand-mark{width:30px;height:30px;border-radius:8px;background:var(--primary)}
+  .brand{font-weight:700;font-size:1.2rem;color:var(--navy)}
+  .hero{padding:24px 24px 64px;text-align:center}
+  .wrap{max-width:640px;margin:0 auto}
+  .eyebrow{display:inline-block;margin-bottom:18px;padding:6px 14px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  h1{font-size:2.3rem;line-height:1.15;color:var(--navy);margin:0 0 14px;letter-spacing:-.02em}
+  .lead{color:var(--muted);font-size:1.08rem;margin:0 0 32px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 2px 4px rgba(16,36,31,.05),0 14px 32px rgba(16,36,31,.08);padding:32px;text-align:left}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+  .field input,.field select,.field textarea{width:100%;padding:.75rem .9rem;border:1.5px solid #cdd9d2;border-radius:10px;font:inherit;color:var(--ink);background:#fbfdfc}
+  .field textarea{min-height:64px;resize:vertical}
+  button{width:100%;padding:.9rem;background:var(--primary);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:1.02rem;cursor:pointer;margin-top:6px}
+  button:hover{background:var(--primary-hover)}
+  .note{margin-top:14px;font-size:.78rem;color:var(--muted);text-align:center}
+  .trust{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:28px;font-size:.85rem;color:var(--muted)}
+  .trust span::before{content:"✓ ";color:var(--primary);font-weight:700}
+  .products-line{margin:18px 0 0;font-size:.85rem;color:var(--muted)}
+  .products-line strong{color:var(--ink)}
+  @media(max-width:520px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand-mark"></div>
+    <span class="brand">Invelsoft</span>
+  </header>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Microsoft product support</span>
+      <h1>Need help with Office, Windows, Outlook, Excel or Xbox?</h1>
+      <p class="lead">Fill the short form below and a specialist will call you back at a time that suits you.</p>
+
+      <form class="card">
+        <div class="row">
+          <div class="field"><label>Full name</label><input type="text" placeholder="Your name"></div>
+          <div class="field"><label>Phone number</label><input type="tel" placeholder="+91 98765 43210"></div>
+        </div>
+        <div class="field"><label>Which product do you need help with?</label>
+          <select><option>Microsoft Office 365</option><option>Windows 10</option><option>Windows 11</option><option>Outlook</option><option>Excel</option><option>Xbox</option></select>
+        </div>
+        <div class="field"><label>What's going wrong? <span style="font-weight:400;color:var(--muted)">(optional)</span></label><textarea placeholder="e.g. Outlook won't send or receive emails"></textarea></div>
+        <button type="button">Get a callback</button>
+        <p class="note">Your details are kept private and used only to respond to your request.</p>
+      </form>
+
+      <p class="products-line"><strong>We support:</strong> Office 365 · Windows 10 · Windows 11 · Outlook · Excel · Xbox</p>
+      <div class="trust">
+        <span>Free callback</span>
+        <span>No cost without agreement</span>
+        <span>Quick response</span>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
